@@ -1,6 +1,9 @@
 # ria-weather-webapp
 
-This template should help get you started developing with Vue 3 in Vite.
+Web App has built using Vue3 - compositons Api
+- For Design - vuetify has been used
+- For state management - Pinia
+- For Making APP calls - VueUse
 
 ## Recommended IDE Setup
 

@@ -1,6 +1,6 @@
 import { useFetch } from '@vueuse/core'
 import { computed } from 'vue'
-import { useLastUpdatedStore } from '@/store/LastUpdatedStore'
+import { useLastUpdatedStore } from '@/stores/LastUpdatedStore'
 
 export async function useCustomFetch(url: string, options = {}) {
   const { data, isFetching, error, execute } = await useFetch(url, options).get().json()

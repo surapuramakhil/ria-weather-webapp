@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia'
 import { fetchCitiesCSV, parseCitiesCSV, type City } from '@/services/cityService'
 
-export const useCityStore = defineStore('city', {
+export const useCityStore = defineStore('cityStore', {
   state: () => ({
     cities: [] as City[]
   }),

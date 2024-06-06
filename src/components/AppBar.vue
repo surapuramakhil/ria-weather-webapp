@@ -1,7 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-import { useCityStore } from '../store/cityStore'
+import { useCityStore } from '../stores/cityStore'
 import { useDebounceFn } from '@vueuse/core';
+import { useTabCitiesStore } from '@/stores/tabCitiesStore'
+
+const tabcitiesStore = useTabCitiesStore()
 
 const displaySearchBox = ref(false)
 
@@ -21,12 +24,9 @@ const onInput = () => {
     debouncedFilterCities();
 };
 
-await cityStore.loadCities();
-
-const city = cityStore.getCity("London");
-console.log('city: ', city)
-console.log('city: sample', cityStore.getFirstCity())
-console.log('city: sample Name', cityStore.getFirstCity().name)
+function onCitySelect() {
+    tabcitiesStore.addTabCities(searchQuery.value.name);
+}
 
 </script>
 
@@ -35,8 +35,8 @@ console.log('city: sample Name', cityStore.getFirstCity().name)
         <v-app-bar-title v-if="!displaySearchBox">Simple Weather</v-app-bar-title>
 
         <v-container v-if="displaySearchBox">
-            <v-autocomplete v-model="searchQuery" item-text="name" item-value="name" :items="filteredCities.name"
-                @input="onInput" return-object />
+            <v-autocomplete v-model="searchQuery" item-title="name" item-value="name" :items="filteredCities"
+                @input="onInput" @change="onCitySelect" return-object />
         </v-container>
 
         <template v-slot:append>
@@ -48,4 +48,4 @@ console.log('city: sample Name', cityStore.getFirstCity().name)
 </template>
 
 
-<style></style>
+<style></style>../stores/cityStore

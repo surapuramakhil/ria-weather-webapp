@@ -1,4 +1,3 @@
-// src/stores/cityStore.ts
 import { defineStore } from 'pinia'
 import { fetchCitiesCSV, parseCitiesCSV, type City } from '@/services/cityService'
 

@@ -1,4 +1,3 @@
-// src/stores/cityStore.ts
 import { defineStore } from 'pinia'
 
 export const useTabCitiesStore = defineStore('tabCitiesStore', {

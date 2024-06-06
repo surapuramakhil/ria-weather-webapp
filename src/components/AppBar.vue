@@ -3,8 +3,10 @@ import { ref } from 'vue'
 import { useCityStore } from '../stores/cityStore'
 import { useDebounceFn } from '@vueuse/core';
 import { useTabCitiesStore } from '@/stores/tabCitiesStore'
+import { useStateStore } from '@/stores/stateStore';
 
 const tabcitiesStore = useTabCitiesStore()
+const stateStore = useStateStore()
 
 const displaySearchBox = ref(false)
 
@@ -28,6 +30,10 @@ function onCitySelect() {
     tabcitiesStore.addTabCities(searchQuery.value.name);
 }
 
+const refreshPage = () => {
+    stateStore.refresh();
+};
+
 </script>
 
 <template>
@@ -40,7 +46,7 @@ function onCitySelect() {
         </v-container>
 
         <template v-slot:append>
-            <v-btn icon="mdi-refresh" v-if="!displaySearchBox"></v-btn>
+            <v-btn icon="mdi-refresh" v-if="!displaySearchBox" v-on="refreshPage"></v-btn>
             <v-btn icon="mdi-magnify" @click="toggleSearchBox"></v-btn>
         </template>
     </v-app-bar>

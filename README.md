@@ -5,6 +5,10 @@ Web App has built using Vue3 - compositons Api
 - For state management - Pinia
 - For Making APP calls - VueUse
 
+UI is optimized of mobile screens.
+
+![App screenshot](<Screenshot 2024-06-06 at 7.24.26 PM.png>)
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).

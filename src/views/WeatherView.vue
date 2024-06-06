@@ -1,6 +1,8 @@
 <script setup>
 import { ref, watch } from 'vue'
 import WeatherCityView from './WeatherCityView.vue'
+// import { useCityStore } from '../stores/cityStore'
+import { useCustomFetch } from '@/utils/useCustomFetch';
 
 const cities = ref(["Rio de Janeiro", "Beijing", "Los Angeles", "Tokyo", "Paris", "London", "New York", "Sydney", "Berlin", "Moscow"])
 const city = ref("Rio de Janeiro")
@@ -24,4 +26,4 @@ watch(city, (newVal, oldVal) => {
         </v-tabs-window>
     </div>
 </template>
-<style></style>
+<style></style>../stores/CityStore

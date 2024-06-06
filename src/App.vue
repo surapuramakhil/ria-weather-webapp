@@ -9,7 +9,7 @@ import LastUpdated from './components/LastUpdated.vue'
   <v-app>
     <AppBar />
     <v-main>
-      <WeatherView />
+      <WeatherView class="fill-height" />
     </v-main>
     <lastUpdated style="width: 100vw;" />
   </v-app>

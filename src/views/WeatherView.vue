@@ -11,7 +11,7 @@ await cityStore.loadCities();
 const tabcitiesStore = useTabCitiesStore()
 const cities = tabcitiesStore.getTabCities()
 
-console.log("cities: ", cities.value)
+console.debug("cities: ", cities)
 
 const city = ref("Rio de Janeiro")
 
@@ -21,7 +21,7 @@ const city = ref("Rio de Janeiro")
         <v-tab v-for="city in cities" :key="city" :value="city">{{ city }}</v-tab>
     </v-tabs>
 
-    <div class="fill-height"
+    <div class="d-flex fill-height justify-center"
         style="height: 100%; align-items: stretch; display: flex; background-image: url('src/assets/backgroud.jpg'), url('http://placehold.it/500x500');">
         <v-tabs-window v-model="city" class="fill-height">
             <v-tabs-window-item v-for="city in cities" :key="city" :value="city">

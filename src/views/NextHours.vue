@@ -1,5 +1,4 @@
-<script setup>
-import { useCustomFetch } from '../utils/useCustomFetch';
+<script setup lang="ts">
 import WeatherHour from '../components/WeatherHour.vue'
 
 const props = defineProps({
@@ -35,4 +34,3 @@ console.log("data passed: ", data)
     flex-wrap: nowrap;
 }
 </style>
-../util/useCustomFetch

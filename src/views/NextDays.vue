@@ -1,14 +1,12 @@
-<script setup>
-import WeatherDay from '../components/WeatherDay.vue'
+<script setup lang="ts">
+import WeatherDay from '@/components/WeatherDay.vue'
 
 const props = defineProps({
     data: Object
 })
 
 const data = props.data
-
-console.log("data - daily ", data)
-
+console.debug("data - daily ", data)
 </script>
 <template>
 
@@ -26,3 +24,4 @@ console.log("data - daily ", data)
         </v-card>
     </v-Container>
 </template>
+<style scoped></style>

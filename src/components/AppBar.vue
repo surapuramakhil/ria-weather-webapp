@@ -30,9 +30,9 @@ function onCitySelect() {
     tabcitiesStore.addTabCities(searchQuery.value.name);
 }
 
-const refreshPage = () => {
-    stateStore.refresh();
-};
+// const refreshPage = () => {
+//     stateStore.refresh();
+// };
 
 </script>
 
@@ -46,7 +46,7 @@ const refreshPage = () => {
         </v-container>
 
         <template v-slot:append>
-            <v-btn icon="mdi-refresh" v-if="!displaySearchBox" v-on="refreshPage"></v-btn>
+            <v-btn icon="mdi-refresh" v-if="!displaySearchBox" @click="stateStore.refresh"></v-btn>
             <v-btn icon="mdi-magnify" @click="toggleSearchBox"></v-btn>
         </template>
     </v-app-bar>

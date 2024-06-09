@@ -9,7 +9,7 @@ import { watch } from 'vue'
 
 const stateStore = useStateStore()
 
-const { appState } = storeToRefs(stateStore.appState)
+const { appState } = storeToRefs(stateStore)
 
 onUpdated(() => {
   console.debug("App.vue updated")

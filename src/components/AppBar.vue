@@ -1,39 +1,50 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useCityStore } from '../stores/cityStore'
+import { useCityStore } from '@/stores/cityStore'
 import { useDebounceFn } from '@vueuse/core';
 import { useTabCitiesStore } from '@/stores/tabCitiesStore'
 import { useStateStore } from '@/stores/stateStore';
+import { watch } from 'vue';
+import type { City } from '@/services/cityService';
 
 const tabcitiesStore = useTabCitiesStore()
 const stateStore = useStateStore()
 
 const displaySearchBox = ref(false)
+const searchFoucs = ref(false)
 
 function toggleSearchBox() {
     displaySearchBox.value = !displaySearchBox.value
 }
 
 const cityStore = useCityStore();
-const searchQuery = ref('');
-const filteredCities = ref(cityStore.cities);
+const searchQuery = ref<City | null>(null);
+const filteredCities = ref<City[]>(cityStore.cities);
 
-const debouncedFilterCities = useDebounceFn(() => {
-    filteredCities.value = cityStore.getCity(searchQuery.value);
-}, 500); // Adjust debounce time as needed
+const debouncedFilterCities = useDebounceFn((query: string) => {
+    console.debug("OnInput searchQuery.value: ", query)
+    filteredCities.value = cityStore.getCity(query);
+}, 300); // Adjust debounce time as needed
 
-const onInput = () => {
-    debouncedFilterCities();
+const onAutoCompleteInput = (event: Event) => {
+    const query = event.target.value;
+    console.debug("OnInput searchQuery.value: ", query)
+    debouncedFilterCities(query);
 };
 
 function onCitySelect() {
-    tabcitiesStore.addTabCities(searchQuery.value.name);
+    if (searchQuery.value === null) {
+        console.debug("No city selected")
+        return
+    }
+    console.debug("On Change searchQuery.value: ", searchQuery)
+    tabcitiesStore.addTabCities(searchQuery.value!.name)
+    searchFoucs.value = false
 }
 
-// const refreshPage = () => {
-//     stateStore.refresh();
-// };
-
+watch(searchQuery, (newVal, oldVal) => {
+    console.debug('searchQuery changed from', oldVal, 'to', newVal)
+});
 </script>
 
 <template>
@@ -42,7 +53,8 @@ function onCitySelect() {
 
         <v-container v-if="displaySearchBox">
             <v-autocomplete v-model="searchQuery" item-title="name" item-value="name" :items="filteredCities"
-                @input="onInput" @change="onCitySelect" return-object />
+                @input="onAutoCompleteInput" @update:model-value="onCitySelect" :focused="searchFoucs" return-object
+                no-filter />
         </v-container>
 
         <template v-slot:append>

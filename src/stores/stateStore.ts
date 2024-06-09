@@ -9,5 +9,5 @@ export const useStateStore = defineStore('stateStore', () => {
     console.debug('New state:', appState.value)
   }
 
-  return { state: appState, refresh }
+  return { appState, refresh }
 })

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useLastUpdatedStore } from '../stores/LastUpdatedStore'
 
 const lastUpdated = useLastUpdatedStore().lastUpdatedAt
@@ -27,4 +27,4 @@ formattedDate = formattedDate.replace(',', ' ');
     font-size: 12px;
     background-color: #3f51b5;
 }
-</style>../store/LastUpdatedStore../stores/LastUpdatedStore
+</style>

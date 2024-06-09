@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppBar from './components/AppBar.vue'
 import WeatherView from './views/WeatherView.vue';
-import LastUpdated from './components/LastUpdated.vue'
+import LastUpdated from '@/components/LastUpdated.vue';
 import { useStateStore } from './stores/stateStore'
 import { storeToRefs } from 'pinia';
 import { onUpdated } from 'vue'

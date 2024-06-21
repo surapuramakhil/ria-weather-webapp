@@ -22,7 +22,7 @@ const city = ref("Rio de Janeiro")
     </v-tabs>
 
     <div class="d-flex fill-height justify-center"
-        style="height: 100%; align-items: stretch; display: flex; background-image: url('src/assets/backgroud.jpg'), url('http://placehold.it/500x500');">
+        style="height: 100%; align-items: stretch; display: flex; background-image: url('/backgroud.jpg'), url('http://placehold.it/500x500');">
         <v-tabs-window v-model="city" class="fill-height">
             <v-tabs-window-item v-for="city in cities" :key="city" :value="city">
                 <WeatherCityView :city="city" />

@@ -27,7 +27,7 @@ const debouncedFilterCities = useDebounceFn((query: string) => {
 }, 300); // Adjust debounce time as needed
 
 const onAutoCompleteInput = (event: Event) => {
-    const query = event.target.value;
+    const query = (event.target as HTMLInputElement).value;
     console.debug("OnInput searchQuery.value: ", query)
     debouncedFilterCities(query);
 };

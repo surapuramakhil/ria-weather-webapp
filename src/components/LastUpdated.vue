@@ -11,7 +11,7 @@ const options = {
     hour12: false // Use 24-hour time format
 };
 
-var formattedDate = new Intl.DateTimeFormat('en-US', options).format(lastUpdated);
+var formattedDate = new Intl.DateTimeFormat('en-US', options).format(lastUpdated ?? null);
 formattedDate = formattedDate.replace(',', ' ');
 
 </script>

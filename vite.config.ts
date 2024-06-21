@@ -6,6 +6,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/ria-weather-webapp/',
   build: {
     sourcemap: true
   },

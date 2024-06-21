@@ -1,7 +1,7 @@
 import Papa from 'papaparse'
 
 export const fetchCitiesCSV = async (): Promise<string> => {
-  const response = await fetch(`${import.meta.env.BASE_URL}/src/assets/cities_20000.csv`)
+  const response = await fetch(`${import.meta.env.BASE_URL}cities_20000.csv`)
   const csvData = await response.text()
   return csvData
 }

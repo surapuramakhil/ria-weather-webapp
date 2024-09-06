@@ -12,7 +12,7 @@ export const useCityStore = defineStore('cityStore', {
   }),
   actions: {
     async loadCities() {
-      const cachedIndex = getCachedData<{index: any, cities: City[]}>(CITIES_MINI_SEARCH_CACHE_KEY)
+      const cachedIndex = await getCachedData<{index: any, cities: City[]}>(CITIES_MINI_SEARCH_CACHE_KEY)
       
       if (cachedIndex) {
         try {
@@ -36,7 +36,7 @@ export const useCityStore = defineStore('cityStore', {
         storeFields: ['id', 'name', 'lat', 'lon', 'country', 'state_code', 'country_code'] 
       })
       this.miniSearch.addAll(this.cities);
-      setCachedData(CITIES_MINI_SEARCH_CACHE_KEY, {
+      await setCachedData(CITIES_MINI_SEARCH_CACHE_KEY, {
         index: this.miniSearch.toJSON(),
         cities: this.cities
       })

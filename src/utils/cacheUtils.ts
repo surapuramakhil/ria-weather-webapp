@@ -1,31 +1,39 @@
-interface CacheData<T> {
-    data: T
-    expiresAt: number | null
-}
+import { LocalStorageUtils } from './localStorageUtils';
+import { IndexedDBUtils } from './indexedDBUtils';
+import type { CacheData } from '@/types/cacheTypes';
 
-export function setCachedData<T>(key: string, data: T, expirationTime?: number): void {
-    try {
-        const cacheData: CacheData<T> = {
-            data: data,
-            expiresAt: expirationTime ? Date.now() + expirationTime : null
-        }
-        localStorage.setItem(key, JSON.stringify(cacheData))
-    } catch (error) {
-        // Handle the error here
-        console.error("Error while setting cached data:", error)
+
+const LOCAL_STORAGE_LIMIT = 1 * 1024 * 512; // 1/2 MB in bytes
+
+export async function setCachedData<T>(key: string, data: T, expirationTime?: number): Promise<void> {
+    const cacheData: CacheData<T> = {
+        data: data,
+        expiresAt: expirationTime ? Date.now() + expirationTime : null
+    };
+
+    const serializedData = JSON.stringify(cacheData);
+
+    if (serializedData.length <= LOCAL_STORAGE_LIMIT) {
+        LocalStorageUtils.setItem(key, cacheData);
+    } else {
+        await IndexedDBUtils.setItem(key, cacheData);
     }
 }
 
-export function getCachedData<T>(key: string): T | null {
-    const cachedData = localStorage.getItem(key)
-    if (!cachedData) return null
+export async function getCachedData<T>(key: string): Promise<T | null> {
+    let cachedData = LocalStorageUtils.getItem<T>(key) || await IndexedDBUtils.getItem<T>(key);
 
-    const parsedData: CacheData<T> = JSON.parse(cachedData)
+    if (!cachedData) return null;
 
-    if (parsedData.expiresAt !== null && Date.now() > parsedData.expiresAt) {
-        localStorage.removeItem(key)
-        return null
+    if (cachedData.expiresAt !== null && Date.now() > cachedData.expiresAt) {
+        await removeCachedData(key);
+        return null;
     }
 
-    return parsedData.data
+    return cachedData.data;
+}
+
+export async function removeCachedData(key: string): Promise<void> {
+    LocalStorageUtils.removeItem(key);
+    await IndexedDBUtils.removeItem(key);
 }
